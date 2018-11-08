@@ -1,6 +1,5 @@
 var tabla;
-
-//Función que se ejecuta al inicio
+ 
 function init(){
 	mostrarform(false);
 	listar();
@@ -13,8 +12,8 @@ function init(){
 
 //Función limpia los formularios de la categoria
 function limpiar()
-{
-	$("#tipoid").val(""); 
+{ 
+	$("#tipoid").val("");
 	$("#descripcion").val("");
 	 
 
@@ -64,7 +63,7 @@ function listar()
 		        ],
 		"ajax": //parametro
 				{//obteniedo datos por get en la variable op
-					url: '../ajax/tipo.php?op=listar',//accedi9endo
+					url: '../ajax/TipoController.php?op=listar',//accedi9endo
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -85,7 +84,7 @@ function guardaryeditar(e)
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/tipo.php?op=guardaryeditar",
+		url: "../ajax/TipoController.php?op=guardaryeditar",
 	    type: "POST",
 	    data: formData,
 	    contentType: false,
@@ -103,16 +102,17 @@ function guardaryeditar(e)
 }
 
 function mostrar(tipoid)
-{tipoid//variable a enviar  valor enviado 
-	$.post("../ajax/tipo.php?op=mostrar",{tipoid : tipoid}, function(data, status)
+{//variable a enviar  valor enviado 
+	$.post("../ajax/TipoController.php?op=mostrar",{tipoid : tipoid}, function(data, status)
 	{
 		data = JSON.parse(data);		
 		mostrarform(true);
 
-		$("#tipoid").val(data.tipoid);
+ 
 		$("#descripcion").val(data.descripcion);
- 		$("#color").val(data.color);
+		$("#tipoid").val(data.tipoid);
 
+ 
  	})
 }
 
@@ -122,7 +122,7 @@ function desactivar(tipoid)
 	bootbox.confirm("¿Está Seguro de desactivar la Categoría?", function(result){
 		if(result)
         {
-        	$.post("../ajax/tipo.php?op=desactivar", {tipoid : tipoid}, function(e){
+        	$.post("../ajax/TipoController.php?op=desactivar", {tipoid : tipoid}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
         	});	
@@ -136,7 +136,7 @@ function activar(tipoid)
 	bootbox.confirm("¿Está Seguro de activar la Categoría?", function(result){
 		if(result)
         {
-        	$.post("../ajax/tipo.php?op=activar", {tipoid : tipoid}, function(e){
+        	$.post("../ajax/TipoController.php?op=activar", {tipoid : tipoid}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
         	});	
