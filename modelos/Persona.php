@@ -1,7 +1,7 @@
 <?php 
 //todos los modelos con mayuscula
 require "../config/Conexion.php";
-
+ 
 Class Persona{
 
   //constructor
@@ -11,17 +11,18 @@ Class Persona{
 
 	}
 	//metodo para insertar registros
-		public function insertar($personaid,$ci,$nombre,$paterno,$materno,$direccion,$telefono,$email,$tipoid)
+		public function insertar($ci,$nombre,$paterno,$materno,$direccion,$telefono,$email,$tipoid)
 	{
-		$sql="INSERT INTO persona (personaid,ci,nombre,paterno,materno,direccion,telefono,email,tipoid,condicion)
-		VALUES ('$personaid','$ci','$nombre',$paterno,$materno,$direccion,$telefono,$email,$tipoid,'1')";
+		$sql="INSERT INTO persona(ci,nombre,paterno,materno,direccion,telefono,email,tipoid,condicion)
+		VALUES ('$ci','$nombre','$paterno','$materno','$direccion','$telefono','$email','$tipoid','1')";
 		return ejecutarConsulta($sql); //retorna 1 si la ejecucion fue correcta
 	}
     //metodo para editar registro categoria funcion js 
-    public function editar($personaid,$ci,$nombre,$paterno,$materno,$direccion,$telefono,$email,$tipoid)
+        public function editar($personaid,$ci,$nombre,$paterno,$materno,$direccion,$telefono,$email,$tipoid)
 	{
 
-		$sql="UPDATE persona SET personaid= '$personaid',ci='$ci',nombre='$nombre',paterno='$paterno',materno='$materno',direccion='$direccion',telefono='$telefono','$email',tipoid='$tipoid';
+		$sql="UPDATE persona SET personaid='$personaid',ci='$ci',nombre='$nombre',paterno='$paterno'
+		,materno='$materno',direccion='$direccion',telefono='$telefono',email='$email',tipoid='$tipoid'
 		WHERE personaid='$personaid'";
 		return ejecutarConsulta($sql);
 	}
@@ -44,14 +45,25 @@ Class Persona{
 	{
 
 		$sql="SELECT * FROM persona WHERE personaid='$personaid'";
-		Return ejecutarConsultasimplefila($sql);//retorna valores  
+		return ejecutarConsultasimplefila($sql);//retorna valores  
 	}
 	//sirve para obtener todas las tuplas de la tabla categoria
 	public function listar()//mostrar todos los registros
 	{
-		$sql="SELECT *FROM persona";
+		$sql="SELECT * FROM persona ";
 		return ejecutarConsulta($sql); //1 o 0
 	}
+	  public function select()//mostrar todos los registros
+	{
+		$sql="SELECT *FROM persona WHERE condicion=1";
+		return ejecutarConsulta($sql); //1 o 0
+	}
+
+	 public function getTipo($personaid)//mostrar todos los registros
+	{
+		$sql="SELECT tipoid FROM persona WHERE personaid='$personaid'";
+		return ejecutarConsulta($sql); //1 o 0
+	}	
 
 }
  ?>

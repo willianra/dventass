@@ -7,6 +7,14 @@ function init(){
 	{
 		guardaryeditar(e);	
 	})
+		//Cargamos los items al select categoria
+	$.post("../ajax/persona.php?op=selectTipo", function(r){
+	            $("#tipoid").html(r);
+	            $('#tipoid').selectpicker('refresh');
+
+	});
+	$("#imagenmuestra").hide();
+
 }
 
 //Función limpia los formularios de la categoria
@@ -69,7 +77,7 @@ function listar()
 		        ],
 		"ajax": //parametro
 				{//obteniedo datos por get en la variable op
-					url: '../ajax/persona.php?op=listar',//accedi9endo
+					url: '../ajax/PersonaController.php?op=listar',//accedi9endo
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -131,7 +139,7 @@ function mostrar(personaid)
 //Función para desactivar registros
 function desactivar(personaid)
 {
-	bootbox.confirm("¿Está Seguro de desactivar la Categoría?", function(result){
+	bootbox.confirm("¿Está Seguro de desactivar la persona?", function(result){
 		if(result)
         {
         	$.post("../ajax/persona.php?op=desactivar", {personaid : personaid}, function(e){

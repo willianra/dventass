@@ -64,7 +64,7 @@ function listar()
 		        ],
 		"ajax": //parametro
 				{//obteniedo datos por get en la variable op
-					url: '../ajax/paquete.php?op=listar',//accedi9endo
+					url: '../ajax/PaqueteController.php?op=listar',//accedi9endo
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -85,7 +85,7 @@ function guardaryeditar(e)
 	var formData = new FormData($("#formulario")[0]);
 
 	$.ajax({
-		url: "../ajax/paquete.php?op=guardaryeditar",
+		url: "../ajax/PaqueteController.php?op=guardaryeditar",
 	    type: "POST",
 	    data: formData,
 	    contentType: false,
@@ -104,11 +104,11 @@ function guardaryeditar(e)
 
 function mostrar(paqueteid)
 {											//variable a enviar  valor enviado 
-	$.post("../ajax/paquete.php?op=mostrar",{paqueteid : paqueteid}, function(data, status)
+	$.post("../ajax/PaqueteController.php?op=mostrar",{paqueteid : paqueteid}, function(data, status)
 	{
 		data = JSON.parse(data);		
 		mostrarform(true);
-
+		
 		$("#paqueteid").val(data.paqueteid);
 		$("#descripcion").val(data.descripcion);
  		$("#color").val(data.color);
@@ -122,7 +122,7 @@ function desactivar(paqueteid)
 	bootbox.confirm("¿Está Seguro de desactivar la Categoría?", function(result){
 		if(result)
         {
-        	$.post("../ajax/paquete.php?op=desactivar", {paqueteid : paqueteid}, function(e){
+        	$.post("../ajax/PaqueteController.php?op=desactivar", {paqueteid : paqueteid}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
         	});	
@@ -136,7 +136,7 @@ function activar(paqueteid)
 	bootbox.confirm("¿Está Seguro de activar la Categoría?", function(result){
 		if(result)
         {
-        	$.post("../ajax/paquete.php?op=activar", {paqueteid : paqueteid}, function(e){
+        	$.post("../ajax/PaqueteController.php?op=activar", {paqueteid : paqueteid}, function(e){
         		bootbox.alert(e);
 	            tabla.ajax.reload();
         	});	

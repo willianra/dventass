@@ -11,17 +11,17 @@ Class Tipo{
 
 	}
 	//metodo para insertar registros
-		public function insertar($tipoid,$descripcion)
+		public function insertar($descripcion)
 	{
-		$sql="INSERT INTO tipo (tipoid,descripcion,condicion)
-		VALUES ('$tipoid','$descripcion','1')";
+		$sql="INSERT INTO tipo (descripcion,estado)
+		VALUES ('$descripcion','1')";
 		return ejecutarConsulta($sql); //retorna 1 si la ejecucion fue correcta
 	}
     //metodo para editar registro categoria funcion js 
-    public function editar($tipo,$descripcion)
+    public function editar($tipoid,$descripcion)
 	{
 
-		$sql="UPDATE tipo SET tipoid= '$tipoid',descripcion='$descripcion' 
+		$sql="UPDATE tipo SET descripcion='$descripcion' 
 		WHERE tipoid='$tipoid'";
 		return ejecutarConsulta($sql);
 	}
@@ -30,13 +30,13 @@ Class Tipo{
 	public function desactivar($tipoid)
 
 	{
-		 $sql="UPDATE tipo SET condicion='0' WHERE tipoid='$tipoid'";
+		 $sql="UPDATE tipo SET estado='0' WHERE tipoid='$tipoid'";
 		return ejecutarConsulta($sql); //1 o 0
 	}
 
 	public function activar ($tipoid)
 	{
-		$sql="UPDATE tipo SET condicion='1' WHERE tipoid='$tipoid'";
+		$sql="UPDATE tipo SET estado='1' WHERE tipoid='$tipoid'";
 		return ejecutarConsulta($sql); 
 	}
   //muestra un tupla 
@@ -44,12 +44,18 @@ Class Tipo{
 	{
 
 		$sql="SELECT * FROM tipo WHERE tipoid='$tipoid'";
-		Return ejecutarConsultasimplefila($sql);//retorna valores  
+		return ejecutarConsultasimplefila($sql);//retorna valores  
 	}
 	//sirve para obtener todas las tuplas de la tabla categoria
 	public function listar()//mostrar todos los registros
 	{
 		$sql="SELECT *FROM tipo";
+		return ejecutarConsulta($sql); //1 o 0
+	}
+    
+    public function select()//mostrar todos los registros
+	{
+		$sql="SELECT *FROM tipo WHERE estado=1";
 		return ejecutarConsulta($sql); //1 o 0
 	}
 
